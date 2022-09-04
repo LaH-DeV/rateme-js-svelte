@@ -6,15 +6,15 @@
 	import Review from "./Review.svelte";
 
 	export let reviews: ReviewType[] = [];
-    const dispatchRemoveReview = createEventDispatcher();
+    const dispatchEvent = createEventDispatcher();
 	const rater = new RateMe({ ...ratemeConfig, allowAnimations: false });
 
     function deleteReview(e: MouseEvent) {
         const reviewWrapper = e.target as HTMLDivElement;
-        dispatchRemoveReview("removerating", reviewWrapper.id);
+        dispatchEvent("removerating", reviewWrapper.id);
     }
     function loadRandom() {
-        dispatchRemoveReview("loadrandom");
+        dispatchEvent("loadrandom");
     }
 </script>
 
