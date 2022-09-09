@@ -21,7 +21,9 @@
 		});
 	});
 
-	$: if (value === 0 && rater != null) rater.clear(ratingId, required);
+	export const update = (rating: number) => {
+		if (rater != null) rater.update(ratingId, rating);
+	}
 </script>
 
 <div class="center" bind:this={container} />

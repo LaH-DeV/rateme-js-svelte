@@ -1,15 +1,21 @@
 <script lang="ts">
     import "./textInputField.scss";
+    import type { FormField } from "src/app.config";
+    import { validate } from "../helpers";
 
     export let isTextarea: boolean = false;
-    export let required: boolean = false;
     export let value: string = '';
     export let name: string;
     export let label: string;
+    export let validation: FormField;
+    
+    const minLength: number = validation.minLength ?? 3;
+    const required: boolean = validation.required ?? false;
+    $:valid = validate(value, validation);
 </script>
 
 <div class="input-field">
-    <label for={name} class="form-label" class:active={value}>{label}</label>
+    <label for={name} class="form-label {valid ? "valid" : "invalid"}" class:active={value} data-validation={`(min ${minLength})`}>{label}</label>
     {#if isTextarea}
         <textarea id={name} required={required} bind:value name={name} class="form-control" rows="6" />
     {:else}
